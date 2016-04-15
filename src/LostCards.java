@@ -69,289 +69,169 @@ public class LostCards {
 
         //initializing suit symbols
 
+        /*
         String clubs = "♣";
         String diamonds = "♢";
         String hearts = "♡";
         String spades = "♠";
+        */
 
+        //init total
+
+        int total = 0;
 
         //initial loop (for whole deck)
 
 
-
-        for (int suits = 0; suits <= 3; suits++) {
+        for (int suit = 0; suit <= 3; suit++, total++) {
 
             //secondary loop (for each suit)
 
-            for (int cards = 1; cards <= 13; cards++) {
+            for (int cardValue = 1; cardValue <= 13; cardValue++, total++) {
 
-                //exception handlers:
+                //init boolean rules
+
+                boolean torn = false;
+                boolean water = false;
+                boolean lost = false;
+                boolean faceDown = false;
+
+                //exception checks
+
+                if ((cardValue == 5 && suit == 0) || (cardValue == 8 && suit == 1) ||
+                        (cardValue == 6 && suit == 2) || (cardValue == 6 && suit == 3)){
+                    faceDown = true;
+                }
+
+                if (((suit == 3 && cardValue == 13)) || ((cardValue == 3) && (suit != 1))){
+                    lost = true;
+                }
+
+                if ((cardValue % 3 == 0) && (suit == 1 || suit == 2)){
+                    torn = true;
+                }
+
+                if ((cardValue == 1 || cardValue == 11 || cardValue == 12 || cardValue == 13) &&
+                        (suit == 0 || suit == 2)){
+                    water = true;
+                }
 
 
-                //lost king of spades
 
-                if ((suits == 3) && (cards == 12)) {
+                //card printing
 
-                    System.out.print("");
+                if(lost){
+
+                total -= 2;
+                continue;
 
                 }
 
-                //brute force 6 of hearts
+                else if(torn && water){
 
-                else if ((cards == 6) && (suits == 2)) {
+                    System.out.print("-~");
+
+                }
+
+                else if(torn){
+
+                    System.out.print("-");
+
+                }
+
+                else if(water){
+
+                    System.out.print("~");
+
+                }
+
+                else if(faceDown){
 
                     System.out.println("[**]");
+                    continue;
 
                 }
-
-                // lost 3s (except 3 of diamonds)
-
-                else if ((cards == 3) && (suits != 1)) {
-
-                    System.out.print("");
-
-                }
-
-                //  torn and water damaged cards
-
-                else if ((cards % 3 == 0) && (((cards == 1) || (cards == 11) || (cards == 12) || (cards == 13)) && (suits != 3))) {
-
-                        switch (suits) {
-
-                            case 0:
-                                System.out.println("-~" + cards + clubs + "~-");
-                                break;
-
-                            case 1:
-                                System.out.println("-~" + cards + diamonds + "~-");
-                                break;
-
-                            case 2:
-                                System.out.println("-~" + cards + hearts + "~-");
-                                break;
-
-                            case 3:
-                                System.out.println("-~" + cards + spades + "~-");
-                                break;
-                        }
-                }
-            }
-
-            //  torn cards
-
-                else if (((cards == 1) || (cards == 11) || (cards == 12) || (cards == 13)) && (suits == 0 || suits == 2)){
-
-                    switch(suits) {
-
-                        case 0:
-                            System.out.println("~" + cards + clubs + "~");
-                            break;
-
-                        case 1:
-                            System.out.println("~" + cards + diamonds + "~");
-                            break;
-
-                        case 2:
-                            System.out.println("~" + cards + hearts + "~");
-                            break;
-
-                        case 3:
-                            System.out.println("~" + cards + spades + "~");
-                            break;
-
-                    }
-                }
-
-
-
-
-            //  water damaged cards
-
-                else if ((cards % 3 == 0) && (suits == 1 || suits == 2)){
-
-                switch(suits) {
-
-                    case 0:
-                        System.out.println("-" + cards + clubs + "-");
-                        break;
-
-                    case 1:
-                        System.out.println("-" + cards + diamonds + "-");
-                        break;
-
-                    case 2:
-                        System.out.println("-" + cards + hearts + "-");
-                        break;
-
-                    case 3:
-                        System.out.println("-" + cards + spades + "-");
-                        break;
-
-                }
-            }
-
-                
-
-            //  face down cards
-
-                else if (((cards == 5) && (suits == 0)) || ((cards == 8) && (suits == 1)) || ((cards == 6) && (suits == 2)) ||
-                        ((cards == 6) && (suits == 3)))
-                {
-
-                    System.out.println("**");
-
-                }
-
-
-
-            //  regular card symbol printing
-
-                else if (cards == 1) {
-
-                    switch(suits) {
-
-                        case 0:
-                            System.out.println("[" + "A" + clubs + "]");
-                            break;
-
-                        case 1:
-                            System.out.println("[" + "A" + diamonds + "]");
-                            break;
-
-                        case 2:
-                            System.out.println("[" + "A" + hearts + "]");
-                            break;
-
-                        case 3:
-                            System.out.println("[" + "A" + spades + "]");
-                            break;
-                    
-                    }
-                }
-
-                else if (cards == 10) {
-
-                    switch(suits) {
-
-                        case 0:
-                            System.out.println("[" + "t" + clubs + "]");
-                            break;
-
-                        case 1:
-                            System.out.println("[" + "t" + diamonds + "]");
-                            break;
-
-                        case 2:
-                            System.out.println("[" + "t" + hearts + "]");
-                            break;
-
-                        case 3:
-                            System.out.println("[" + "t" + spades + "]");
-                            break;
-
-                    }
-
-                }
-
-                else if (cards == 11) {
-
-                    switch(suits) {
-
-                        case 0:
-                            System.out.println("[" + "J" + clubs + "]");
-                            break;
-
-                        case 1:
-                            System.out.println("[" + "J" + diamonds + "]");
-                            break;
-
-                        case 2:
-                            System.out.println("[" + "J" + hearts + "]");
-                            break;
-
-                        case 3:
-                            System.out.println("[" + "J" + spades + "]");
-                            break;
-
-                    }
-
-                }
-
-                else if (cards == 12) {
-
-                    switch(suits) {
-
-                        case 0:
-                            System.out.println("[" + "Q" + clubs + "]");
-                            break;
-
-                        case 1:
-                            System.out.println("[" + "Q" + diamonds + "]");
-                            break;
-
-                        case 2:
-                            System.out.println("[" + "Q" + hearts + "]");
-                            break;
-
-                        case 3:
-                            System.out.println("[" + "Q" + spades + "]");
-                            break;
-
-                    }
-
-                }
-
-                else if (cards == 13) {
-
-                    switch(suits) {
-
-                        case 0:
-                            System.out.println("[" + "K" + clubs + "]");
-                            break;
-
-                        case 1:
-                            System.out.println("[" + "K" + diamonds + "]");
-                            break;
-
-                        case 2:
-                            System.out.println("[" + "K" + hearts + "]");
-                            break;
-
-                        case 3:
-                            System.out.println("[" + "K" + spades + "]");
-                            break;
-
-                    }
-
-                }
-
-                //print suit symbols
 
                 else {
-                    switch(suits) {
 
-                        case 0:
-                            System.out.println("[" + cards + clubs + "]");
-                            break;
+                    System.out.print("[");
 
-                        case 1:
-                            System.out.println("[" + cards + diamonds + "]");
-                            break;
+                }
 
-                        case 2:
-                            System.out.println("[" + cards + hearts + "]");
-                            break;
-
-                        case 3:
-                            System.out.println("[" + cards + spades + "]");
-                            break;
+                //basic switches
 
 
-                    }
+
+                switch(cardValue) {
+
+                    case 1:
+                        System.out.print("A");
+                        break;
+                    case 10:
+                        System.out.print("t");
+                        break;
+                    case 11:
+                        System.out.print("J");
+                        break;
+                    case 12:
+                        System.out.print("Q");
+                        break;
+                    case 13:
+                        System.out.print("K");
+                        break;
+                    default:
+                        System.out.print(cardValue);
+
+                }
+
+                switch(suit) {
+
+                    case 0:
+                        System.out.print("♣");
+                        break;
+                    case 1:
+                        System.out.print("♢");
+                        break;
+                    case 2:
+                        System.out.print("♡");
+                        break;
+                    case 3:
+                        System.out.print("♠");
+                        break;
+
+                }
+
+                //boolean rules part 2
+
+                if(torn && water){
+
+                    System.out.println("~-");
+
+                }
+
+                else if(water){
+
+                    System.out.println("~");
+
+                }
+
+                else if(torn){
+
+                    System.out.println("-");
+
+                }
+
+                else {
+
+                    System.out.println("]");
+
                 }
 
                 }
             }
+        System.out.println(total);
         }
+
     }
+
 
