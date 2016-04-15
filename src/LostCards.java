@@ -127,7 +127,7 @@ public class LostCards {
 
                 }
 
-                else if(torn && water){
+                if(torn && water){
 
                     System.out.print("-~");
 
@@ -145,63 +145,69 @@ public class LostCards {
 
                 }
 
-                else if(faceDown){
-
-                    System.out.println("[**]");
-                    continue;
-
-                }
-
-                else {
+                else if (!torn && !water) {
 
                     System.out.print("[");
 
                 }
 
-                //basic switches
+                if(faceDown){
 
-
-
-                switch(cardValue) {
-
-                    case 1:
-                        System.out.print("A");
-                        break;
-                    case 10:
-                        System.out.print("t");
-                        break;
-                    case 11:
-                        System.out.print("J");
-                        break;
-                    case 12:
-                        System.out.print("Q");
-                        break;
-                    case 13:
-                        System.out.print("K");
-                        break;
-                    default:
-                        System.out.print(cardValue);
+                    System.out.print("**");
 
                 }
 
-                switch(suit) {
+                //basic switches
 
-                    case 0:
-                        System.out.print("♣");
-                        break;
-                    case 1:
-                        System.out.print("♢");
-                        break;
-                    case 2:
-                        System.out.print("♡");
-                        break;
-                    case 3:
-                        System.out.print("♠");
-                        break;
+                if(!faceDown) {
 
+                    switch (cardValue) {
+
+                        case 1:
+                            System.out.print("A");
+                            break;
+                        case 10:
+                            System.out.print("t");
+                            break;
+                        case 11:
+                            System.out.print("J");
+                            break;
+                        case 12:
+                            System.out.print("Q");
+                            break;
+                        case 13:
+                            System.out.print("K");
+                            break;
+                        default:
+                            System.out.print(cardValue);
+
+                    }
+
+                    switch (suit) {
+
+                        case 0:
+                            System.out.print("♣");
+                            break;
+                        case 1:
+                            System.out.print("♢");
+                            break;
+                        case 2:
+                            System.out.print("♡");
+                            break;
+                        case 3:
+                            System.out.print("♠");
+                            break;
+
+                    }
                 }
 
                 //boolean rules part 2
+
+                if(!torn && !water) {
+
+                    System.out.println("]");
+
+                }
 
                 if(torn && water){
 
@@ -221,11 +227,7 @@ public class LostCards {
 
                 }
 
-                else {
 
-                    System.out.println("]");
-
-                }
 
                 }
             }
